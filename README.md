@@ -1,1 +1,1 @@
-# django_work
+# 19.2 Знакомство с Django
