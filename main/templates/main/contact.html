@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+{% block header %}
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-8 fw-normal text-body-emphasis">Страница контактов</h1>
+    <p class="fs-5 text-body-secondary">Добавление контактов</p>
+</div>
+{% endblock %}
+{% block content %}
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Форма отправки контактов</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="FormControlName" class="form-label">Имя</label>
+                    <input type="text" class="form-control" id="FormControlName" placeholder="name" name="name">
+                    <label for="FormControlEmail" class="form-label">Email адрес</label>
+                    <input type="email" class="form-control" id="FormControlEmail" name="email"
+                           placeholder="name@example.com">
+                    <input type="submit" value="Добавить" class="w-100 btn btn-lg btn-success"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Добавленный контакт</h4>
+            </div>
+            <div class="card-body">
+                <p class="card-title pricing-card-title navy_color">Имя: {{ name }}</small></p>
+                <p class="card-title pricing-card-title navy_color">Email адрес: {{ email }}</small></p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Контакты</h4>
+            </div>
+            <div class="card-body">
+                {% for contact in contacts %}
+                <p>
+                    <small class="card-title pricing-card-title navy_color">{{ contact.name }}: {{ contact.email }}</small>
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

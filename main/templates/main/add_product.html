@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+{% block header %}
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-8 fw-normal text-body-emphasis">Добавление продукта</h1>
+    <p class="fs-5 text-body-secondary">Форма для добавления продукта</p>
+</div>
+{% endblock %}
+{% block content %}
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+    </div>
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Новый продукт</h4>
+                {% if success %}
+                <p class="card-title pricing-card-title navy_color">Успешно!</small></p>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="FormControlName" class="form-label">Наименование</label>
+                    <input type="text" class="form-control" id="FormControlName" placeholder="наименование" name="name">
+                    <label for="FormControlDesc" class="form-label">Описание</label>
+                    <input type="text" class="form-control" id="FormControlDesc" name="description"
+                           placeholder="описание">
+                    <label for="FormControlPreview" class="form-label">Фото</label>
+                    <input type="file" class="form-control" id="FormControlPreview" name="preview"
+                           placeholder="имя файла с фотографией">
+                    <label for="FormControlCategory" class="form-label">Категория</label>
+                    <input type="text" class="form-control" id="FormControlCategory" name="category"
+                           placeholder="категория">
+                    <label for="FormControlPrice" class="form-label">Цена</label>
+                    <input type="text" class="form-control" id="FormControlPrice" name="price"
+                           placeholder="цена">
+                    <input type="submit" value="Добавить" class="w-100 btn btn-lg btn-success"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

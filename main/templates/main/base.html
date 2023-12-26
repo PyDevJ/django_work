@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+{% load custom_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="container py-3 body">
+    <header>
+        {% include 'main/includes/inc_main_menu.html' %}
+        {% block header %}
+        {% endblock %}
+    </header>
+    <main>
+        <div class="row text-center">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+            <div class="col-12 col-md">
+                <small class="d-block mb-3 text-body-secondary">&copy;{% this_year '%Y' %}</small>
+            </div>
+        </div>
+    </footer>
+</div>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

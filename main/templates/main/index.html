@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+{% block header %}
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-8 fw-normal text-body-emphasis">Стартовая страница</h1>
+</div>
+{% endblock %}
+{% block content %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+<div class="col">
+    <div class="row text-center">
+        <p class="fs-5 text-body-secondary">Список товаров</p>
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">название товара</th>
+                <th scope="col">цена за штуку</th>
+                <th scope="col">описание</th>
+                <th scope="col">категория</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in products %}
+            <tr>
+                <td><a href="{% url 'main:product' product_id=item.pk %}">{{ item.name }}</a></td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.description|truncatechars:100 }}</td>
+                <td>{{ item.category }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
