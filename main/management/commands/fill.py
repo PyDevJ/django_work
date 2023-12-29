@@ -12,22 +12,22 @@ class Command(BaseCommand):
         category_list = [{
             "pk": 1,
             "name": "овощи",
-            "description": "Различные овощные культуры"
-        },
+            "description": "Продукты питания"
+            },
             {
                 "pk": 2,
                 "name": "фрукты",
-                "description": "Различные фрукты"
+                "description": "Всё фруктовое разнообразие"
             },
             {
                 "pk": 3,
-                "name": "мясо",
-                "description": "Мясные продукты"
+                "name": "электроника",
+                "description": "Цифровая и бытовая техника"
             },
             {
                 "pk": 4,
                 "name": "напитки",
-                "description": "Безалкогольные напитки"
+                "description": "Натуральные соки, газировки, компоты"
             }, ]
         # for item in category_list:
         #     Category.objects.create(**item)
@@ -39,59 +39,60 @@ class Command(BaseCommand):
 
         product_list = [{
             "pk": 1,
-            "name": "морковь",
-            "description": "морковь обыкновенная",
-            "category": categories[0],
-            "price": "30.99",
+            "name": "часы",
+            "description": "с электронным табло и радио",
+            "category": categories[2],
+            "price": "99.99",
         },
             {
                 "pk": 2,
-                "name": "капуста белокочанная",
-                "description": "капуста обыкновенная",
+                "name": "картофель",
+                "description": "грунтовая",
                 "category": categories[0],
-                "price": "60.00",
+                "price": "30.00",
             },
             {
                 "pk": 3,
-                "name": "яблоки",
-                "description": "яблоко Леголь",
-                "category": categories[1],
-                "price": "70.50",
+                "name": "картофель",
+                "description": "парниковая",
+                "category": categories[0],
+                "price": "28.50",
             },
             {
                 "pk": 4,
-                "name": "бананы",
-                "description": "бананы Гондурас",
+                "name": "яблоко",
+                "description": "летние сорта",
+                "preview": "products/apple.jpg",
                 "category": categories[1],
-                "price": "121.99",
+                "price": "120.00",
             },
             {
                 "pk": 5,
-                "name": "свинина",
-                "description": "свинина экстра",
-                "category": categories[2],
-                "price": "379.99",
+                "name": "кола",
+                "description": "без сахара",
+                "category": categories[3],
+                "price": "120.99",
             },
             {
                 "pk": 6,
-                "name": "куриное филе",
-                "description": "куриное филе Приосколье",
-                "category": categories[2],
-                "price": "254.50",
+                "name": "кола Pus",
+                "description": "с сахаром",
+                "category": categories[3],
+                "price": "150.49",
             },
             {
                 "pk": 7,
-                "name": "сок гранатовый",
-                "description": "сок гранатовый первого отжима",
+                "name": "лемонад",
+                "description": "напиток сильногазированный",
                 "category": categories[3],
-                "price": "229.99",
+                "price": "70.00",
             },
             {
                 "pk": 8,
-                "name": "нектар манго",
-                "description": "нектар манго осветленный",
-                "category": categories[3],
-                "price": "119.99",
+                "name": "смарт-часы",
+                "description": "наручные умные часы",
+                "category": categories[2],
+                "price": "4000",
             },]
         products = []
         for product in product_list:
