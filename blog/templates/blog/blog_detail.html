@@ -11,7 +11,7 @@
     <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm">
             <div class="card-header py-3">
-                <h4 class="my-0 fw-normal">Название: {{ blog.title }}</h4>
+                <h4 class="my-0 fw-normal">Название: {{ blog.title }} ({{ object.slug }})</h4>
             </div>
             <div class="card-body">
                 <p class="card-title pricing-card-title navy_color">Slug: {{ blog.slug }}</small></p>
@@ -22,6 +22,9 @@
             </div>
             <div class="card-footer py-3">
                 <p class="card-title pricing-card-title navy_color">Создано: {{ blog.created_at }}</small></p>
+            </div>
+            <div class="card-footer">
+                Просмотры: {{ object.views }}
             </div>
             <a href="{% url 'blog:edit' object.pk %}" type="button"
                class="btn btn-sm btn-success">Редактировать</a>
