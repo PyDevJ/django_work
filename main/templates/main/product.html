@@ -19,7 +19,13 @@
                 <p class="card-title pricing-card-title navy_color">{{ product.description }}</p>
             </div>
             <div class="card-body">
-                <img src="{{ product.preview|mediapath }}" />
+                <img src="{{ product.preview|mediapath }}"/>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="{% url 'main:update_product' object.pk %}" type="button"
+                       class="btn btn-sm btn-outline-secondary">Изменить</a>
+                </div>
             </div>
             <div class="card-footer py-3">
                 <p class="card-title pricing-card-title navy_color">создано: {{ product.created_at }}</p>
