@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-{% load custom_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,7 +22,7 @@
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
             <div class="col-12 col-md">
-                <small class="d-block mb-3 text-body-secondary">&copy;{% this_year '%Y' %}</small>
+                <small class="d-block mb-3 text-body-secondary">&copy;{% now "Y" %}</small>
             </div>
         </div>
     </footer>

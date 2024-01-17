@@ -15,7 +15,6 @@ class BlogCreateView(CreateView):
             new_bl = form.save()
             new_bl.slug = slugify(new_bl.title)
             new_bl.save()
-
         return super().form_valid(form)
 
 
@@ -29,7 +28,6 @@ class BlogUpdateView(UpdateView):
             new_bl = form.save()
             new_bl.slug = slugify(new_bl.title)
             new_bl.save()
-
         return super().form_valid(form)
 
     def get_success_url(self):

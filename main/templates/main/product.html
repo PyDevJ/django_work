@@ -14,16 +14,16 @@
                 <h4 class="my-0 fw-normal">Название: {{ product.name }}</h4>
             </div>
             <div class="card-body">
-                <p class="card-title pricing-card-title navy_color">Категория: {{ product.category.name }}</small></p>
-                <p class="card-title pricing-card-title navy_color">Цена: {{ product.price }}</small></p>
-                <p class="card-title pricing-card-title navy_color">{{ product.description }}</small></p>
+                <p class="card-title pricing-card-title navy_color">Категория: {{ product.category.name }}</p>
+                <p class="card-title pricing-card-title navy_color">Цена: {{ product.price }}</p>
+                <p class="card-title pricing-card-title navy_color">{{ product.description }}</p>
             </div>
             <div class="card-body">
                 <img src="{{ product.preview|mediapath }}" />
             </div>
             <div class="card-footer py-3">
-                <p class="card-title pricing-card-title navy_color">создано: {{ product.created_at }}</small></p>
-                <p class="card-title pricing-card-title navy_color">изменено: {{ product.changed_at }}</small></p>
+                <p class="card-title pricing-card-title navy_color">создано: {{ product.created_at }}</p>
+                <p class="card-title pricing-card-title navy_color">изменено: {{ product.changed_at }}</p>
             </div>
         </div>
     </div>

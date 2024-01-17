@@ -1,5 +1,4 @@
 {% extends 'main/base.html' %}
-{% load custom_tags %}
 {% block header %}
 <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
     <h1 class="display-8 fw-normal text-body-emphasis">Описание блога</h1>
@@ -14,14 +13,18 @@
                 <h4 class="my-0 fw-normal">Название: {{ blog.title }} ({{ object.slug }})</h4>
             </div>
             <div class="card-body">
-                <p class="card-title pricing-card-title navy_color">Slug: {{ blog.slug }}</small></p>
-                <p class="card-title pricing-card-title navy_color">Содержимое: {{ blog.text }}</small></p>
+                <p class="card-title pricing-card-title navy_color">Slug: {{ blog.slug }}</p>
+                <p class="card-title pricing-card-title navy_color">Содержимое: {{ blog.text }}</p>
             </div>
             <div class="card-body">
-                <img src="{{ blog.preview|mediapath }}"/>
+                {% if blog.preview %}
+                <img src="{{ object.preview.url }}"/>
+                {% else %}
+                Изображение отсутствует
+                {% endif %}
             </div>
             <div class="card-footer py-3">
-                <p class="card-title pricing-card-title navy_color">Создано: {{ blog.created_at }}</small></p>
+                <p class="card-title pricing-card-title navy_color"><small>Создано: {{ blog.created_at }}</small></p>
             </div>
             <div class="card-footer">
                 Просмотры: {{ object.views }}

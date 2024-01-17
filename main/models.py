@@ -28,6 +28,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
+        ordering = ['-id']
 
 
 class Contact(models.Model):

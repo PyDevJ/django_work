@@ -17,7 +17,7 @@
             <div class="card-body">
                 {% for object in object_list %}
                 <p class="card-title pricing-card-title navy_color">Имя: {{object.name}} / (Email:
-                    {{object.email}})</small></p>
+                    {{object.email}})</p>
                 {% endfor %}
                 <a class="w-100 btn btn-lg btn-success" href="{% url 'main:contact_form' %}">Добавить контакт</a>
             </div>
