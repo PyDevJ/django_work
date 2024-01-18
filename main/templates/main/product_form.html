@@ -1,27 +1,49 @@
 {% extends 'main/base.html' %}
 {% block header %}
 <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-    <h1 class="display-8 fw-normal text-body-emphasis">Добавление продукта</h1>
-    <p class="fs-5 text-body-secondary">Форма для добавления продукта</p>
+    <h1 class="display-8 fw-normal text-body-emphasis">
+        {% if object %}
+        Редактирование продукта
+        {% else %}
+        Добавление продукта
+        {% endif %}
+    </h1>
+    <p class="fs-5 text-body-secondary">
+        {% if object %}
+        Форма для редактирования продукта
+        {% else %}
+        Форма для добавления продукта
+        {% endif %}
+    </p>
 </div>
 {% endblock %}
 {% block content %}
-<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-    <div class="col">
-    </div>
-    <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-            <div class="card-header py-3">
-                <h4 class="my-0 fw-normal">Новый продукт</h4>
-            </div>
-            <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Продукт</h4>
+                </div>
+                <div class="card-body">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <input type="submit" value="Сохранить" class="w-100 btn btn-lg btn-success"/>
-                </form>
+                </div>
             </div>
         </div>
+        <div class="col-6">
+            {% if object %}
+            <div class="card">
+                <div class="card-body">
+                    {{ formset.management_form }}
+                    {% for form in formset.forms %}
+                    {{ form.as_p }}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
     </div>
-</div>
+</form>
 {% endblock %}

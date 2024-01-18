@@ -29,8 +29,7 @@ class Command(BaseCommand):
                 "name": "напитки",
                 "description": "Натуральные соки, газировки, компоты"
             }, ]
-        # for item in category_list:
-        #     Category.objects.create(**item)
+
         categories = []
         for category in category_list:
             categories.append(Category(**category))
@@ -93,7 +92,8 @@ class Command(BaseCommand):
                 "description": "наручные умные часы",
                 "category": categories[2],
                 "price": "4000",
-            },]
+            }, ]
+
         products = []
         for product in product_list:
             products.append(Product(**product))
