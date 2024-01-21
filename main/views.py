@@ -14,7 +14,6 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
-    template_name = 'main/product.html'
 
 
 class ProductCreateView(CreateView):

@@ -1,8 +1,8 @@
 {% extends 'main/base.html' %}
 {% block header %}
 <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-    <h1 class="display-8 fw-normal text-body-emphasis">Авторизация пользователя</h1>
-    <p class="fs-5 text-body-secondary">Форма для авторизации пользователя</p>
+    <h1 class="display-8 fw-normal text-body-emphasis">Ркгистрация пользователя</h1>
+    <p class="fs-5 text-body-secondary">Форма для регистрации пользователя</p>
 </div>
 {% endblock %}
 {% block content %}
@@ -11,12 +11,12 @@
         <div class="col">
             <div class="card mb-4 rounded-3 shadow-sm">
                 <div class="card-header py-3">
-                    <h4 class="my-0 fw-normal">Вход</h4>
+                    <h4 class="my-0 fw-normal">Регистрация</h4>
                 </div>
                 <div class="card-body">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <input type="submit" value="Войти" class="w-100 btn btn-lg btn-success"/>
+                    <input type="submit" value="Регистрация" class="w-100 btn btn-lg btn-success"/>
                 </div>
             </div>
         </div>
