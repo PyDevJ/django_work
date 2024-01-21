@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+{% block header %}
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-8 fw-normal text-body-emphasis">
+        {% if object %}
+        Редактирование пользователя
+        {% else %}
+        Авторизация пользователя
+        {% endif %}
+    </h1>
+    <p class="fs-5 text-body-secondary">
+        {% if object %}
+        Форма для редактирования пользователя
+        {% else %}
+        Форма для авторизации пользователя
+        {% endif %}
+    </p>
+</div>
+{% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Вход</h4>
+                </div>
+                <div class="card-body">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Войти" class="w-100 btn btn-lg btn-success"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
