@@ -1,11 +1,7 @@
-import random
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from main.models import NULLABLE
-
-random_code = str(random.randint(00000000, 99999999))
 
 
 class User(AbstractUser):
@@ -15,7 +11,7 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='users/', verbose_name='аватар', **NULLABLE)
     country = models.CharField(max_length=35, verbose_name='страна', **NULLABLE)
     is_active = models.BooleanField(default=False, verbose_name='статус активности')
-    email_verification = models.CharField(max_length=8, default=random_code, verbose_name='код верификации почты', **NULLABLE)
+    email_verification = models.CharField(max_length=8, verbose_name='код верификации почты', **NULLABLE)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -26,5 +22,3 @@ class User(AbstractUser):
     class Meta:
         verbose_name = "пользователь"
         verbose_name_plural = "пользователи"
-
-        # ordering = ('country', 'is_active')

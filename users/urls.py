@@ -1,12 +1,10 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
-# from .views import user_logout
-
 
 from users.apps import UsersConfig
-from users.views import RegisterView, ProfileView
+from users.views import RegisterView, ProfileView, VerifyEmailView, EmailConfirmedView, EmailConfirmationFailedView, \
+    EmailConfirmationSentView
 
-# from users.views import logOut
 
 app_name = UsersConfig.name
 
@@ -16,8 +14,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
     path('profile/', ProfileView.as_view(), name='profile'),
-    # ссылка на выход пользователя через функцию
-    # path('logout/', user_logout, name='logout'),
-    # ссылка на выход пользователя через кастомный класс
-    # path('logout/', logOut.as_view(), name='logout'),
+    path('email-confirmation-sent/', EmailConfirmationSentView.as_view(), name='email_confirmation_sent'),
+    path('activate-user/<str:token>/', VerifyEmailView.as_view(), name='activate_user'),
+    path('email-confirmed/', EmailConfirmedView.as_view(), name='email_confirmed'),
+    path('confirm-email-failed/', EmailConfirmationFailedView.as_view(), name='email_confirmation_failed'),
 ]
