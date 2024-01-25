@@ -17,6 +17,7 @@
                 <p class="card-title pricing-card-title navy_color">Категория: {{ product.category.name }}</p>
                 <p class="card-title pricing-card-title navy_color">Цена: {{ product.price }}</p>
                 <p class="card-title pricing-card-title navy_color">{{ product.description }}</p>
+                <p class="card-title pricing-card-title navy_color">Владелец: {{ object.owner_product|default:"Без владельца" }}</p>
             </div>
             <div class="card-body">
                 <img src="{{ product.preview|mediapath }}" alt="{{ object }}" width="256px"/>

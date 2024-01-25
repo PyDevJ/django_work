@@ -18,6 +18,11 @@
                     {{ form.as_p }}
                     <input type="submit" value="Сохранить" class="w-100 btn btn-lg btn-success"/>
                 </div>
+                <div class="card_footer">
+                    <div class="col-12">
+                        <a href="{% url 'users:genpassword' %}" class="btn btn-danger">Сгенерировать пароль</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

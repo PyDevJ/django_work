@@ -15,7 +15,7 @@ class UserProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'phone', 'avatar')
+        fields = ('email', 'first_name', 'last_name', 'phone', 'avatar', 'country')
 
     def __init__(self, *args, **kwargs):
         """для скрытия информации о ссылке на смену пароля"""

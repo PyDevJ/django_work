@@ -3,8 +3,7 @@ from django.urls import path
 
 from users.apps import UsersConfig
 from users.views import RegisterView, ProfileView, VerifyEmailView, EmailConfirmedView, EmailConfirmationFailedView, \
-    EmailConfirmationSentView
-
+    EmailConfirmationSentView, generate_new_password
 
 app_name = UsersConfig.name
 
@@ -18,4 +17,5 @@ urlpatterns = [
     path('activate-user/<str:token>/', VerifyEmailView.as_view(), name='activate_user'),
     path('email-confirmed/', EmailConfirmedView.as_view(), name='email_confirmed'),
     path('confirm-email-failed/', EmailConfirmationFailedView.as_view(), name='email_confirmation_failed'),
+    path('profile/genpassword', generate_new_password, name='genpassword'),
 ]

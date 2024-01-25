@@ -11,6 +11,10 @@ class ProductListView(ListView):
     template_name = 'main/index.html'
     paginate_by = 5
 
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering', '-changed_at')
+        return ordering
+
 
 class ProductDetailView(DetailView):
     model = Product
@@ -20,6 +24,16 @@ class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('main:index')
+
+    def form_valid(self, form):
+        # formset = self.get_context_data()['formset']
+        self.object = form.save()
+        self.object.owner_product = self.request.user
+        self.object.save()
+        # if formset.is_valid():
+        #     formset.instance = self.object
+        #     formset.save()
+        return super().form_valid(form)
 
 
 class ProductUpdateView(UpdateView):

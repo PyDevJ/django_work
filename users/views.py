@@ -1,12 +1,15 @@
 import random
+import secrets
 import string
 
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, UpdateView, TemplateView
 from users.forms import UserRegisterForm, UserProfileForm
@@ -81,10 +84,23 @@ class EmailConfirmationFailedView(TemplateView):
         return context
 
 
-class ProfileView(UpdateView):
+class ProfileView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserProfileForm
     success_url = reverse_lazy('users:profile')
 
     def get_object(self, queryset=None):
         return self.request.user
+
+@login_required
+def generate_new_password(request):
+    new_password = secrets.token_hex(nbytes=5)
+    send_mail(
+        "Вы сменили пароль",
+        f'Ваш новый пароль: {new_password}',
+        settings.EMAIL_HOST_USER,
+        [request.user.email]
+    )
+    request.user.set_password(new_password)
+    request.user.save()
+    return redirect(reverse('users:login'))

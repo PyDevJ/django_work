@@ -1,4 +1,5 @@
 import psycopg2
+from django.conf import settings
 from django.db import models, connection
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -26,6 +27,7 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=16)
     created_at = models.DateTimeField(auto_now_add=True)
     changed_at = models.DateTimeField(auto_now=True)
+    owner_product = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='владелец')
 
     def __str__(self):
         return f'Продукт: {self.id} {self.name} по цене {self.price} в категории {self.category}'
