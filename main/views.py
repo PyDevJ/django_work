@@ -1,13 +1,15 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from main.models import Product, Contact, Version
 from main.forms import ProductForm, VersionForm, ContactForm
 
 
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Product
+    permission_required = 'main.view_product'
     template_name = 'main/index.html'
     paginate_by = 5
 
@@ -16,13 +18,14 @@ class ProductListView(ListView):
         return ordering
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
+    permission_required = 'main.add_product'
     success_url = reverse_lazy('main:index')
 
     def form_valid(self, form):
@@ -36,9 +39,10 @@ class ProductCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
+    permission_required = 'main.change_product'
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -63,12 +67,20 @@ class ProductUpdateView(UpdateView):
     success_url = reverse_lazy('main:index')
 
 
+class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Product
+    success_url = reverse_lazy('main:index')
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
 class ContactListView(ListView):
     model = Contact
     template_name = 'main/contact.html'
 
 
-class ContactCreateView(CreateView):
+class ContactCreateView(LoginRequiredMixin, CreateView):
     model = Contact
     form_class = ContactForm
     success_url = reverse_lazy('main:contact')

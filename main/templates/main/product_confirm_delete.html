@@ -2,8 +2,8 @@
 {% load custom_tags %}
 {% block header %}
 <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-    <h1 class="display-8 fw-normal text-body-emphasis">Описание продукта</h1>
-    <p class="fs-5 text-body-secondary">Форма описания выбранного продукта</p>
+    <h1 class="display-8 fw-normal text-body-emphasis">Удаление продукта</h1>
+    <p class="fs-5 text-body-secondary">Форма удаления выбранного продукта</p>
 </div>
 {% endblock %}
 {% block content %}
@@ -23,12 +23,17 @@
                 <img src="{{ product.preview|mediapath }}" alt="{{ object }}" width="256px"/>
             </div>
             <div class="d-flex justify-content-between align-items-center">
+                <form method="post">
                 <div class="btn-group">
-                    {% if perms.main.change_product %}
                     <a href="{% url 'main:update_product' object.pk %}" type="button"
                        class="btn btn-sm btn-outline-secondary">Изменить</a>
+                        {% csrf_token %}
+                    {% if user.is_superuser %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
                     {% endif %}
+                    <a href="{% url 'main:index' %}" class="btn btn-warning">Отмена</a>
                 </div>
+                </form>
             </div>
             <div class="card-footer py-3">
                 <p class="card-title pricing-card-title navy_color">создано: {{ product.created_at }}</p>

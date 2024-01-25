@@ -1,6 +1,8 @@
 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'main:index' %}">Главная</a>
+    {% if perms.main.add_product %}
     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'main:create_product' %}">Добавить продукт</a>
+    {% endif %}
     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'main:contact' %}">Контакты</a>
     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'blog:list' %}">Блог</a>
     {% if user.is_authenticated %}

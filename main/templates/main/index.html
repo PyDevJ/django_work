@@ -42,6 +42,12 @@
                 <td>{{ object.price }}</td>
                 <td>{{ object.description|truncatechars:100 }}</td>
                 <td>{{ object.category.name }}</td>
+                <td>
+                    {% if perms.main.delete_product %}
+                    <a href="{% url 'main:delete_product' object.pk %}" type="button"
+                       class="btn btn-sm btn-outline-danger">Удалить</a>
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
             </tbody>
