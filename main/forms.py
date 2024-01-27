@@ -21,7 +21,9 @@ class ContactForm(StyleFormMixin, forms.ModelForm):
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('name', 'description', 'preview', 'category', 'price',)
+        # fields = '__all__'
+        # fields = ('name', 'is_published', 'description', 'preview', 'category', 'price',)
+        exclude = ('owner_product',)
 
     def clean_name(self):
         cleaned_data = self.cleaned_data.get('name')

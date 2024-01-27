@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.forms import inlineformset_factory
+from django.http import Http404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -39,10 +40,11 @@ class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
         return super().form_valid(form)
 
 
-class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     permission_required = 'main.change_product'
+    success_url = reverse_lazy('main:index')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -64,7 +66,27 @@ class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
             formset.save()
         return super().form_valid(form)
 
-    success_url = reverse_lazy('main:index')
+    def get_form(self, form_class=None):
+        """
+        Если у пользователя нет прав на редактирование поля, то удаляем его из формы.
+        """
+        form = super().get_form(form_class)
+        # if self.object.owner_product != self.request.user:
+        if self.request.user.has_perms(['main.change_product']):
+            product_fields = [f for f in form.fields.keys()]
+            for field in product_fields:
+                if not self.request.user.has_perm(f'main.set_{field}'):
+                    del form.fields[field]
+        return form
+
+    def test_func(self):
+        """
+        Если пользователь не владелец продукта, то не может его изменять.
+        """
+        return (self.get_object().owner_product == self.request.user)
+
+    def handle_no_permission(self):
+        raise Http404('У вас нет прав для изменения этого товара')
 
 
 class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
