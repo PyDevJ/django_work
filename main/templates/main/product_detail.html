@@ -17,7 +17,8 @@
             <div class="card-body">
                 <p class="card-title pricing-card-title navy_color">Категория: {{ product.category.name }}</p>
                 <p class="card-title pricing-card-title navy_color">Цена: {{ product.price }}</p>
-                <p class="card-title pricing-card-title navy_color">Владелец: {{ object.owner_product|default:"Без владельца" }}</p>
+                <p class="card-title pricing-card-title navy_color">
+                    Владелец: {{ object.owner_product|default:"Без владельца" }}</p>
                 <p class="card-title pricing-card-title navy_color">Описание: {{ product.description }}</p>
             </div>
             <div class="card-body">
@@ -34,6 +35,22 @@
             <div class="card-footer py-3">
                 <p class="card-title pricing-card-title navy_color">создано: {{ product.created_at }}</p>
                 <p class="card-title pricing-card-title navy_color">изменено: {{ product.changed_at }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    версии продукта
+                </h5>
+            </div>
+            <div class="card-body">
+            <ul>
+                {% for subject in subjects %}
+                <li>{{ subject }}</li>
+                {% endfor %}
+            </ul>
             </div>
         </div>
     </div>

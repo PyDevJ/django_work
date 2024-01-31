@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # кэширование всего сайта
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -150,3 +153,21 @@ else:
 # EMAIL_HOST_USER = 'noreply@oscarbot.ru'
 # EMAIL_HOST_PASSWORD = 'AsTSNVv7pun9'
 # EMAIL_USE_SSL = True
+
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": os.getenv('CACHE_LOCATION'),
+#      }
+#  }
+
+# CACHE_ENABLED = True
+CACHE_ENABLED = False
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": "redis://127.0.0.1:6379",
+         }
+     }
